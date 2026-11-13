@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}{{ category }} in {{ search.area }}{% endblock %}
+{% block content %}
+<h1>{{ category }} in {{ search.area }}</h1>
+
+{% if search.status == "running" %}
+  {% include "status.html" %}
+
+{% elif search.status == "needs_choice" %}
+  <p>{{ search.message }}</p>
+  <form method="post" action="/search/{{ search.id }}/choose">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    {% for c in search.candidates %}
+    <label class="choice"><input type="radio" name="choice" value="{{ c.choice_id }}" {% if loop.first %}required{% endif %}> {{ c.name }}</label>
+    {% endfor %}
+    <button type="submit">Search this area</button>
+  </form>
+
+{% elif search.status == "failed" %}
+  <p class="error" role="alert">{{ search.message }}</p>
+  <form method="post" action="/search/{{ search.id }}/rerun">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <button type="submit">Retry</button>
+  </form>
+
+{% else %}
+  {% if search.status == "partial" %}
+  <p class="warning" role="alert">{{ search.message }}
+    {% for f in search.failures %}<br><small>{{ f.source }}: {{ f.error }}</small>{% endfor %}
+  </p>
+  {% endif %}
+
+  <div class="toolbar">
+    <form method="get" action="/search/{{ search.id }}">
+      <input type="hidden" name="sort" value="{{ sort }}"><input type="hidden" name="dir" value="{{ dir }}">
+      <label><input type="checkbox" name="contact" value="1" {% if contact %}checked{% endif %} onchange="this.form.submit()"> Only leads with a phone or website</label>
+      <noscript><button type="submit">Apply</button></noscript>
+    </form>
+    <form method="post" action="/search/{{ search.id }}/rerun">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="refresh" value="1">
+      <button type="submit">Refresh</button>
+    </form>
+    {% if leads %}
+    <a class="button" href="/search/{{ search.id }}/export.csv?sort={{ sort }}&amp;dir={{ dir }}&amp;contact={{ 1 if contact else 0 }}">Export CSV</a>
+    {% endif %}
+  </div>
+
+  {% if not leads %}
+    {% if total and contact %}
+    <p>No leads match this filter. Clear the filter to see all {{ total }} leads.</p>
+    {% else %}
+    <p>No leads found. Try broadening the area or choosing a different category.</p>
+    {% endif %}
+  {% else %}
+  <p>{{ leads|length }} lead{{ "" if leads|length == 1 else "s" }}</p>
+  <table>
+    <thead><tr>
+      {% for key, label in [("name","Name"),("address","Location"),("phone","Phone"),("website","Website"),("source","Source")] %}
+      <th aria-sort="{{ ('ascending' if dir == 'asc' else 'descending') if sort == key else 'none' }}">
+        <a href="/search/{{ search.id }}?sort={{ key }}&amp;dir={{ 'desc' if sort == key and dir == 'asc' else 'asc' }}&amp;contact={{ 1 if contact else 0 }}">{{ label }}</a>
+      </th>
+      {% endfor %}
+      <th>Type</th>
+    </tr></thead>
+    <tbody>
+    {% for l in leads %}
+      <tr>
+        <td><a href="/lead/{{ l.id }}">{{ l.name }}</a></td>
+        <td>{{ l.address }}</td>
+        <td>{{ l.phone }}</td>
+        <td>{% if l.website %}<a href="{{ l.website }}" rel="noopener noreferrer nofollow" target="_blank">{{ l.website }}</a>{% endif %}</td>
+        <td>{{ l.source_names|join(", ") }}</td>
+        <td>{{ l.kind }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+{% endif %}
+{% endblock %}

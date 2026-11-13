@@ -38,19 +38,19 @@
 
 ## 7. Web UI (lead-ui)
 
-- [ ] 7.1 Create the FastAPI app with base template, vendored HTMX and CSS, bound to 127.0.0.1, with OSM attribution in the footer; verify `TestClient` tests for the index page and that the default bind host is loopback
-- [ ] 7.2 Build the search form, background search execution, and HTMX status polling; verify tests for valid submit, missing category/area errors, ambiguity choice prompt, failure message with retry, and unsupported category
-- [ ] 7.3 Build the results table with sorting, "has contact info" filter, empty-state message, and lead detail view with provenance; verify tests for columns, blanks for missing values, filter behaviour, and detail showing original values and source links
-- [ ] 7.4 Build the duplicate review queue (side-by-side, merge / keep-separate, CSRF-protected) and search history with reopen/refresh; verify tests for merge, reject, empty queue, missing/invalid CSRF token rejected, and reopening a past search without new source calls
-- [ ] 7.5 Implement CSV export (UTF-8 BOM, attribution, per-row source, formula-injection neutralisation, empty-results message); verify tests for escaping commas/quotes/newlines, a `=cmd` value being neutralised, attribution present, and nothing-to-export behaviour
+- [x] 7.1 Create the FastAPI app with base template, vendored HTMX and CSS, bound to 127.0.0.1, with OSM attribution in the footer; verify `TestClient` tests for the index page and that the default bind host is loopback
+- [x] 7.2 Build the search form, background search execution, and HTMX status polling; verify tests for valid submit, missing category/area errors, ambiguity choice prompt, failure message with retry, and unsupported category
+- [x] 7.3 Build the results table with sorting, "has contact info" filter, empty-state message, and lead detail view with provenance; verify tests for columns, blanks for missing values, filter behaviour, and detail showing original values and source links
+- [x] 7.4 Build the duplicate review queue (side-by-side, merge / keep-separate, CSRF-protected) and search history with reopen/refresh; verify tests for merge, reject, empty queue, missing/invalid CSRF token rejected, and reopening a past search without new source calls
+- [x] 7.5 Implement CSV export (UTF-8 BOM, attribution, per-row source, formula-injection neutralisation, empty-results message); verify tests for escaping commas/quotes/newlines, a `=cmd` value being neutralised, attribution present, and nothing-to-export behaviour
 
 ## 8. Integration and end-to-end tests
 
 Unit tests live with each task above. These groups add the other two required levels; none may
 call live external services.
 
-- [ ] 8.1 Integration tests (`tests/integration`): real SQLite file + real services + the OSM adapter against a mocked HTTP transport with recorded fixtures, exercising search → raw storage → normalize → dedupe → read-back; verify the suite covers success, partial source failure, all-sources-fail, rate-limit backoff, cache hit and forced refresh, re-run creating no duplicates, and persistence across reopening the DB
-- [ ] 8.2 Integration tests for the web layer: FastAPI app wired to a temp DB and fake sources, driven through HTTP (search, status polling, results, detail, review merge/reject with CSRF, history, CSV export); verify unhappy paths (invalid form, bad CSRF, unknown category, empty results, nothing to export) pass
+- [x] 8.1 Integration tests (`tests/integration`): real SQLite file + real services + the OSM adapter against a mocked HTTP transport with recorded fixtures, exercising search → raw storage → normalize → dedupe → read-back; verify the suite covers success, partial source failure, all-sources-fail, rate-limit backoff, cache hit and forced refresh, re-run creating no duplicates, and persistence across reopening the DB
+- [x] 8.2 Integration tests for the web layer: FastAPI app wired to a temp DB and fake sources, driven through HTTP (search, status polling, results, detail, review merge/reject with CSRF, history, CSV export); verify unhappy paths (invalid form, bad CSRF, unknown category, empty results, nothing to export) pass
 - [ ] 8.3 End-to-end tests (`tests/e2e`): launch the real app process against a local fake Nominatim/Overpass server and drive it in a browser with Playwright; verify these journeys pass: search → results table → open lead detail → export CSV; ambiguous area prompt; source-failure message and retry; duplicate review merge and reject; repeat search served from cache
 - [ ] 8.4 Add a GitHub Actions workflow (free for public repos) that runs `ruff check` and the unit, integration and e2e suites on every PR and on pushes to `main`; verify the workflow runs green on the PR
 

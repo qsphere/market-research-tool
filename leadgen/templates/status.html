@@ -1,0 +1,3 @@
+<div id="status" hx-get="/search/{{ search.id }}/status" hx-trigger="every 1s" hx-swap="outerHTML" role="status">
+  <p>Searching for <strong>{{ search.category }}</strong> in <strong>{{ search.area }}</strong>… this can take a little while.</p>
+</div>

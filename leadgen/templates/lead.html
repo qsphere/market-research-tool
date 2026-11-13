@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}{{ lead.name }}{% endblock %}
+{% block content %}
+<h1>{{ lead.name }}</h1>
+<p><small>{{ lead.kind }} · {{ lead.category }}</small></p>
+
+<h2>Details</h2>
+<dl>
+  <dt>Address</dt><dd>{{ lead.address or "—" }}</dd>
+  <dt>Phone</dt><dd>{{ lead.phone or "—" }}{% for p in lead.extra_phones %}, {{ p }}{% endfor %}</dd>
+  <dt>Website</dt><dd>{% if lead.website %}<a href="{{ lead.website }}" rel="noopener noreferrer nofollow" target="_blank">{{ lead.website }}</a>{% else %}—{% endif %}</dd>
+  <dt>Coordinates</dt><dd>{% if lead.lat is not none %}{{ "%.5f"|format(lead.lat) }}, {{ "%.5f"|format(lead.lon) }}{% else %}—{% endif %}</dd>
+</dl>
+
+<h2>Original values</h2>
+<dl>
+  <dt>Phone as listed</dt><dd>{{ lead.phone_original or "—" }}</dd>
+  <dt>Website as listed</dt><dd>{{ lead.website_original or "—" }}</dd>
+</dl>
+
+<h2>Sources</h2>
+<table>
+  <thead><tr><th>Source</th><th>Record</th><th>Collected</th></tr></thead>
+  <tbody>
+  {% for s in lead.sources %}
+    <tr>
+      <td>{{ s.source }}</td>
+      <td>{% if s.url and s.url.startswith("https://") %}<a href="{{ s.url }}" rel="noopener noreferrer" target="_blank">{{ s.source_record_id }}</a>{% else %}{{ s.source_record_id }}{% endif %}</td>
+      <td>{{ s.fetched_at }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

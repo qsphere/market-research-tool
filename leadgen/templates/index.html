@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Search{% endblock %}
+{% block content %}
+<h1>Find leads</h1>
+<form method="post" action="/search" class="search-form" novalidate>
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label for="category">Category or event type</label>
+  <select id="category" name="category" aria-describedby="category-error">
+    <option value="">Choose…</option>
+    {% for c in categories %}
+    <option value="{{ c.key }}" {% if form.category == c.key %}selected{% endif %}>{{ c.name }} ({{ c.kind }})</option>
+    {% endfor %}
+  </select>
+  {% if errors.category %}<p class="error" id="category-error" role="alert">{{ errors.category }}</p>{% endif %}
+
+  <label for="area">Area (city, region, or postal code)</label>
+  <input id="area" name="area" type="text" value="{{ form.area or '' }}" placeholder="Portland, Oregon" aria-describedby="area-error">
+  {% if errors.area %}<p class="error" id="area-error" role="alert">{{ errors.area }}</p>{% endif %}
+
+  <button type="submit">Search</button>
+</form>
+{% endblock %}

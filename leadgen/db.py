@@ -119,6 +119,14 @@ class Repository:
              self._ts(), search_id),
         )  # fmt: skip
 
+    def set_search_choice(self, search_id: int, choice: str) -> None:
+        """Make the cache key specific to the area the user picked from an ambiguous list."""
+        row = self.get_search(search_id)
+        self._exec(
+            "UPDATE searches SET area_key=? WHERE id=?",
+            (f"{area_key(row['area'])}|{choice}", search_id),
+        )
+
     def restart_search(self, search_id: int) -> None:
         self._exec(
             "UPDATE searches SET status='running', message='', failures='[]', finished_at=NULL"

@@ -87,6 +87,9 @@ class SearchService:
             return "failed"
 
     def _execute(self, search_id: int, choice: str | None) -> str:
+        if choice:
+            self.repo.restart_search(search_id)
+            self.repo.set_search_choice(search_id, choice)
         row = self.repo.get_search(search_id)
         try:
             category = self.catalog().get(row["category"])

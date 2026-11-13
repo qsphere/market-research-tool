@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Review duplicates{% endblock %}
+{% block content %}
+<h1>Possible duplicates</h1>
+{% if not pairs %}
+  <p>Nothing needs review.</p>
+{% endif %}
+{% for p in pairs %}
+<section class="pair" id="pair-{{ p.id }}" aria-label="Possible duplicate pair">
+  <p><small>Name similarity {{ (p.score * 100)|round|int }}%</small></p>
+  <div class="side-by-side">
+    {% for l in [p.a, p.b] %}
+    <article>
+      <h2><a href="/lead/{{ l.id }}">{{ l.name }}</a></h2>
+      <dl>
+        <dt>Address</dt><dd>{{ l.address or "—" }}</dd>
+        <dt>Phone</dt><dd>{{ l.phone or "—" }}</dd>
+        <dt>Website</dt><dd>{{ l.website or "—" }}</dd>
+        <dt>Source</dt><dd>{{ l.source_names|join(", ") }}</dd>
+      </dl>
+    </article>
+    {% endfor %}
+  </div>
+  <div class="actions">
+    {% for action, label in [("merge", "Merge"), ("reject", "Keep separate")] %}
+    <form method="post" action="/review/{{ p.id }}/{{ action }}" hx-post="/review/{{ p.id }}/{{ action }}" hx-target="#pair-{{ p.id }}" hx-swap="outerHTML" class="inline">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <button type="submit">{{ label }}</button>
+    </form>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+{% endblock %}
