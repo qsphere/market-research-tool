@@ -1,0 +1,33 @@
+schema: spec-driven
+
+# Project context — injected into every artifact-generation prompt.
+# Keep this as POINTERS, not copies. README.md is the canonical project description.
+context: |
+  Project: market-research-tool — performs market research for a given product in a given
+  geographic area using only free-to-use tools and data sources.
+
+  Current focus (first feature): lead generation. Given a business category (e.g. consignment
+  shops, gift stores) or event type (e.g. craft fairs, farmers markets) and an area, find
+  matching registered businesses/events and return name, location/address, contact phone
+  number, and website.
+
+  Longer-term goals (not a priority yet): full market research reports for a product + area
+  (demand signals, competitors, pricing, demographics, trends); traceable sources for every
+  finding.
+
+  Hard constraint: free data sources and tools only — no paid APIs, no required subscriptions.
+  Respect each source's terms of service and rate limits.
+
+  Stack: TBD.
+
+rules:
+  proposal:
+    - Include a Non-goals section.
+    - Name the free data source(s) the change relies on and confirm their terms allow this use.
+  specs:
+    - Describe externally observable behaviour only — no file paths, no implementation detail.
+    - Cover the unhappy paths explicitly, not just the happy path (no results, partial records,
+      source unavailable or rate-limited).
+  tasks:
+    - Every task that adds or changes code carries its tests in the same task — happy AND unhappy path.
+    - Start from a branch off main.
