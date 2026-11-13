@@ -24,17 +24,17 @@
 
 ## 5. Source adapters (source-adapters)
 
-- [ ] 5.1 Define the `Source` protocol, `RawRecord`/`LeadCandidate` types, typed errors, and the enabled-sources registry; verify tests that a fake source is queried when enabled, skipped when disabled, and that multiple sources are combined
-- [ ] 5.2 Add `categories.yaml` catalog loader (business/event kinds, multiple criteria per category) and a lookup that rejects unknown categories; verify tests for multi-criteria category, unknown category, malformed YAML, and a catalog edit taking effect without code changes
-- [ ] 5.3 Implement shared HTTP client behaviour: descriptive User-Agent, 1 req/s throttle for Nominatim, bounded exponential backoff on 429/5xx/timeouts; verify tests with a mocked transport and fake clock for spacing, backoff, and giving up after the max attempts
-- [ ] 5.4 Implement Nominatim geocoding with caching, multiple candidates (ambiguity), not-found, and too-large-area refusal; verify mocked-transport tests for each outcome and that a repeat lookup makes no network call
-- [ ] 5.5 Implement the Overpass query builder and OSM adapter (tags → raw records → candidates, unnamed places excluded, OSM id kept); verify tests against recorded fixture responses covering full fields, missing phone/website, unnamed place, empty result, malformed JSON, and 429/504 handling
+- [x] 5.1 Define the `Source` protocol, `RawRecord`/`LeadCandidate` types, typed errors, and the enabled-sources registry; verify tests that a fake source is queried when enabled, skipped when disabled, and that multiple sources are combined
+- [x] 5.2 Add `categories.yaml` catalog loader (business/event kinds, multiple criteria per category) and a lookup that rejects unknown categories; verify tests for multi-criteria category, unknown category, malformed YAML, and a catalog edit taking effect without code changes
+- [x] 5.3 Implement shared HTTP client behaviour: descriptive User-Agent, 1 req/s throttle for Nominatim, bounded exponential backoff on 429/5xx/timeouts; verify tests with a mocked transport and fake clock for spacing, backoff, and giving up after the max attempts
+- [x] 5.4 Implement Nominatim geocoding with caching, multiple candidates (ambiguity), not-found, and too-large-area refusal; verify mocked-transport tests for each outcome and that a repeat lookup makes no network call
+- [x] 5.5 Implement the Overpass query builder and OSM adapter (tags → raw records → candidates, unnamed places excluded, OSM id kept); verify tests against recorded fixture responses covering full fields, missing phone/website, unnamed place, empty result, malformed JSON, and 429/504 handling
 - [ ] 5.6 Validate the catalog's OSM tag mappings (consignment, gift shop, craft fair, farmers market, etc.) with a few real low-volume Overpass queries, adjust `categories.yaml`, and record known coverage gaps in `README.md`; verify by saving the sample result counts in the PR description
 
 ## 6. Search orchestration (lead-search)
 
-- [ ] 6.1 Implement the search service: validate category/area, resolve area, run enabled sources, persist raw records, normalize, dedupe, link results to the search, and report per-source failures as partial; verify tests for success, unsupported category, ambiguous area, area not found, no matches, one-source-fails, all-sources-fail, and rate-limited
-- [ ] 6.2 Implement result caching and forced refresh; verify tests that an identical search inside the cache window makes no source calls and a refresh does
+- [x] 6.1 Implement the search service: validate category/area, resolve area, run enabled sources, persist raw records, normalize, dedupe, link results to the search, and report per-source failures as partial; verify tests for success, unsupported category, ambiguous area, area not found, no matches, one-source-fails, all-sources-fail, and rate-limited
+- [x] 6.2 Implement result caching and forced refresh; verify tests that an identical search inside the cache window makes no source calls and a refresh does
 
 ## 7. Web UI (lead-ui)
 

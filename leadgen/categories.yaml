@@ -1,0 +1,43 @@
+# Category catalog: user-facing category -> OpenStreetMap tag criteria.
+# A place matches a category if it matches ANY criterion; within one criterion ALL tags
+# must match. Edit this file to change search behaviour; no code changes needed.
+# Tag keys/values may contain only letters, digits, underscore, colon, hyphen.
+categories:
+  consignment:
+    name: Consignment shop
+    kind: business
+    criteria:
+      - {shop: second_hand, second_hand: consignment}
+      - {shop: consignment}
+  thrift_store:
+    name: Thrift / second-hand store
+    kind: business
+    criteria:
+      - {shop: second_hand}
+      - {shop: charity}
+  gift_shop:
+    name: Gift shop
+    kind: business
+    criteria:
+      - {shop: gift}
+  antique_shop:
+    name: Antique shop
+    kind: business
+    criteria:
+      - {shop: antiques}
+  boutique:
+    name: Boutique
+    kind: business
+    criteria:
+      - {shop: boutique}
+  farmers_market:
+    name: Farmers market
+    kind: event
+    criteria:
+      - {amenity: marketplace}
+  craft_fair:
+    name: Craft fair
+    kind: event
+    criteria:
+      - {amenity: marketplace, marketplace: craft}
+      - {event: craft_fair}

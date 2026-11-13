@@ -1,0 +1,12 @@
+{
+  "version": 0.6,
+  "elements": [
+    {"type": "node", "id": 1001, "lat": 45.5231, "lon": -122.6765,
+     "tags": {"name": "Joe's Gifts", "shop": "gift", "phone": "(503) 555-0142",
+              "website": "Example.com/gifts/", "addr:housenumber": "12", "addr:street": "Main St",
+              "addr:city": "Portland", "addr:state": "OR", "addr:postcode": "97201"}},
+    {"type": "way", "id": 2002, "center": {"lat": 45.53, "lon": -122.68},
+     "tags": {"name": "Gift Barn", "shop": "gift"}},
+    {"type": "node", "id": 3003, "lat": 45.51, "lon": -122.66, "tags": {"shop": "gift"}}
+  ]
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "place_id": 1, "osm_type": "relation", "osm_id": 186579, "lat": "45.5202471", "lon": "-122.6741949",
+    "boundingbox": ["45.4325", "45.6529", "-122.8367", "-122.4719"],
+    "display_name": "Portland, Multnomah County, Oregon, United States",
+    "importance": 0.75, "address": {"city": "Portland", "state": "Oregon", "country_code": "us"}
+  },
+  {
+    "place_id": 2, "osm_type": "relation", "osm_id": 2747, "lat": "43.6591", "lon": "-70.2568",
+    "boundingbox": ["43.6", "43.75", "-70.35", "-70.2"],
+    "display_name": "Portland, Cumberland County, Maine, United States",
+    "importance": 0.4, "address": {"city": "Portland", "state": "Maine", "country_code": "us"}
+  }
+]

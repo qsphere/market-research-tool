@@ -51,3 +51,37 @@ class LeadCandidate:
     address_parts: dict[str, str] = field(default_factory=dict)
     lat: float | None = None
     lon: float | None = None
+
+
+@dataclass(frozen=True)
+class Area:
+    """A resolved search area."""
+
+    name: str  # display name from the geocoder
+    lat: float
+    lon: float
+    bbox: tuple[float, float, float, float]  # south, west, north, east
+    osm_type: str = ""  # node | way | relation
+    osm_id: int = 0
+    country_code: str = ""
+    area_km2: float = 0.0
+
+    @property
+    def choice_id(self) -> str:
+        return f"{self.osm_type}/{self.osm_id}"
+
+    @property
+    def overpass_area_id(self) -> int | None:
+        if self.osm_type == "relation":
+            return 3_600_000_000 + self.osm_id
+        if self.osm_type == "way":
+            return 2_400_000_000 + self.osm_id
+        return None
+
+
+@dataclass(frozen=True)
+class Category:
+    key: str
+    name: str
+    kind: str  # business | event
+    criteria: tuple[dict[str, str], ...]  # each criterion: tags that must all match; any may match
