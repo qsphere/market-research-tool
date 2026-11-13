@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}History{% endblock %}
+{% block content %}
+<h1>Search history</h1>
+{% if not searches %}
+  <p>No searches yet. <a href="/">Start one.</a></p>
+{% else %}
+<table>
+  <thead><tr><th>When</th><th>Category</th><th>Area</th><th>Status</th><th>Leads</th><th></th></tr></thead>
+  <tbody>
+  {% for s in searches %}
+    <tr>
+      <td>{{ s.created_at }}</td><td>{{ s.category_name }}</td><td>{{ s.area }}</td>
+      <td>{{ s.status }}</td><td>{{ s.count }}</td>
+      <td class="actions">
+        <a href="/search/{{ s.id }}">Open</a>
+        <form method="post" action="/search/{{ s.id }}/rerun" class="inline">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+          <input type="hidden" name="refresh" value="1">
+          <button type="submit">Refresh</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}

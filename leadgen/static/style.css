@@ -1,0 +1,27 @@
+:root { --fg:#1b1f23; --bg:#fff; --muted:#5b6570; --accent:#0b5fff; --line:#d5dae0; --err:#b00020; --warn:#8a5a00; }
+@media (prefers-color-scheme: dark) {
+  :root { --fg:#e6e8eb; --bg:#14171a; --muted:#9aa4af; --accent:#7fa8ff; --line:#2c333a; --err:#ff8a9b; --warn:#ffc266; }
+}
+* { box-sizing: border-box; }
+body { margin:0; font:16px/1.5 system-ui, sans-serif; color:var(--fg); background:var(--bg); }
+header, main, footer { max-width: 72rem; margin: 0 auto; padding: 0.75rem 1rem; }
+nav { display:flex; gap:1.25rem; align-items:baseline; border-bottom:1px solid var(--line); padding-bottom:.5rem; }
+nav .brand { font-weight:700; margin-right:auto; text-decoration:none; color:var(--fg); }
+a { color: var(--accent); }
+footer { color: var(--muted); font-size:.85rem; border-top:1px solid var(--line); margin-top:2rem; }
+.search-form { display:grid; gap:.5rem; max-width:28rem; }
+input[type=text], select { padding:.5rem; font:inherit; color:inherit; background:var(--bg); border:1px solid var(--line); border-radius:4px; }
+button, .button { padding:.5rem 1rem; font:inherit; color:#fff; background:var(--accent); border:0; border-radius:4px; cursor:pointer; text-decoration:none; display:inline-block; }
+@media (prefers-color-scheme: dark) { button, .button { color:#0a0a0a; } }
+.error { color:var(--err); } .warning { color:var(--warn); }
+.toolbar { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; margin:.75rem 0; }
+.toolbar form { margin:0; }
+table { border-collapse:collapse; width:100%; }
+th, td { text-align:left; padding:.4rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+.choice { display:block; margin:.25rem 0; }
+.pair { border:1px solid var(--line); border-radius:6px; padding:.75rem 1rem; margin:1rem 0; }
+.side-by-side { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+dl { display:grid; grid-template-columns:max-content 1fr; gap:.2rem 1rem; }
+dt { color:var(--muted); } dd { margin:0; overflow-wrap:anywhere; }
+.actions { display:flex; gap:.5rem; align-items:center; } form.inline { display:inline; margin:0; }
+@media (max-width:40rem) { .side-by-side { grid-template-columns:1fr; } table { font-size:.9rem; } }

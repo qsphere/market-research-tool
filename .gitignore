@@ -22,3 +22,11 @@ output/
 .DS_Store
 Thumbs.db
 *.log
+
+# Python / app data
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+*.db
+*.db-journal
+*.sqlite3
