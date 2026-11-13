@@ -52,7 +52,7 @@ call live external services.
 - [x] 8.1 Integration tests (`tests/integration`): real SQLite file + real services + the OSM adapter against a mocked HTTP transport with recorded fixtures, exercising search → raw storage → normalize → dedupe → read-back; verify the suite covers success, partial source failure, all-sources-fail, rate-limit backoff, cache hit and forced refresh, re-run creating no duplicates, and persistence across reopening the DB
 - [x] 8.2 Integration tests for the web layer: FastAPI app wired to a temp DB and fake sources, driven through HTTP (search, status polling, results, detail, review merge/reject with CSRF, history, CSV export); verify unhappy paths (invalid form, bad CSRF, unknown category, empty results, nothing to export) pass
 - [x] 8.3 End-to-end tests (`tests/e2e`): launch the real app process against a local fake Nominatim/Overpass server and drive it in a browser with Playwright; verify these journeys pass: search → results table → open lead detail → export CSV; ambiguous area prompt; source-failure message and retry; duplicate review merge and reject; repeat search served from cache
-- [ ] 8.4 Add a GitHub Actions workflow (free for public repos) that runs `ruff check` and the unit, integration and e2e suites on every PR and on pushes to `main`; verify the workflow runs green on the PR
+- [x] 8.4 Add a GitHub Actions workflow (free for public repos) that runs `ruff check` and the unit, integration and e2e suites on every PR and on pushes to `main`; verify the workflow runs green on the PR
 
 ## 9. Contribution, process, and wrap-up
 
