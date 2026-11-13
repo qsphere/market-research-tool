@@ -20,6 +20,9 @@ context: |
 
   Stack: TBD.
 
+  Project rules live in AGENTS.md (the single source of truth) and must stay AI-tool agnostic;
+  never put rules only in a tool-specific file such as CLAUDE.md.
+
 rules:
   proposal:
     - Include a Non-goals section.
@@ -30,4 +33,7 @@ rules:
       source unavailable or rate-limited).
   tasks:
     - Every task that adds or changes code carries its tests in the same task — happy AND unhappy path.
-    - Start from a branch off main.
+    - Test at all three levels — unit, integration, and e2e — wherever the task touches that
+      level; state in the task which levels it covers.
+    - Start from a branch off main; never commit or push to main directly. Changes reach main
+      only via a PR that is created first.
