@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "leadgen"
+version = "0.1.0"
+description = "Local lead generation from free data sources (OpenStreetMap)."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn>=0.29",
+  "jinja2>=3.1",
+  "httpx>=0.27",
+  "phonenumbers>=8.13",
+  "rapidfuzz>=3.6",
+  "pyyaml>=6.0",
+  "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-playwright>=0.5", "ruff>=0.4"]
+
+[tool.setuptools.packages.find]
+include = ["leadgen*"]
+
+[tool.setuptools.package-data]
+leadgen = ["migrations/*.sql", "templates/*.html", "static/*", "categories.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "unit: fast pure-logic tests",
+  "integration: real SQLite/services with mocked HTTP",
+  "e2e: real app process driven in a browser",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]

@@ -1,10 +1,10 @@
 ## 1. Setup
 
-- [ ] 1.1 Create branch `lead-generation-mvp` off `main`; verify with `git branch --show-current`
-- [ ] 1.2 Install Python 3.12+ (free, python.org) and verify `python --version` reports 3.12 or newer
-- [ ] 1.3 Add an MIT `LICENSE` file (copyright holder "London C", year 2026) and declare `license = "MIT"` in `pyproject.toml`; verify `LICENSE` starts with "MIT License" and `pip install -e .` metadata shows the MIT license
-- [ ] 1.4 Add `pyproject.toml` (fastapi, uvicorn, jinja2, httpx, phonenumbers, rapidfuzz, pyyaml; dev: pytest, pytest-playwright, ruff), `.gitignore` (venv, `*.db`, caches), package skeleton with `python -m leadgen` entry point, and a `tests/unit`, `tests/integration`, `tests/e2e` layout with matching pytest markers (`unit`, `integration`, `e2e`) so each level can be run separately; verify `pip install -e .[dev]` succeeds, `pytest -m unit`, `pytest -m integration` and `pytest -m e2e` each run (collect with zero failures) and `ruff check` passes
-- [ ] 1.5 Add config module (db path, host 127.0.0.1, port, Overpass/Nominatim endpoints, cache window, dedup thresholds, optional contact string); verify unit tests cover defaults, overrides, and an invalid value being rejected
+- [x] 1.1 Create branch `lead-generation-mvp` off `main`; verify with `git branch --show-current`
+- [x] 1.2 Install Python 3.12+ (free, python.org) and verify `python --version` reports 3.12 or newer
+- [x] 1.3 Add an MIT `LICENSE` file (copyright holder "London C", year 2026) and declare `license = "MIT"` in `pyproject.toml`; verify `LICENSE` starts with "MIT License" and `pip install -e .` metadata shows the MIT license
+- [x] 1.4 Add `pyproject.toml` (fastapi, uvicorn, jinja2, httpx, phonenumbers, rapidfuzz, pyyaml; dev: pytest, pytest-playwright, ruff), `.gitignore` (venv, `*.db`, caches), package skeleton with `python -m leadgen` entry point, and a `tests/unit`, `tests/integration`, `tests/e2e` layout with matching pytest markers (`unit`, `integration`, `e2e`) so each level can be run separately; verify `pip install -e .[dev]` succeeds, `pytest -m unit`, `pytest -m integration` and `pytest -m e2e` each run (collect with zero failures) and `ruff check` passes
+- [x] 1.5 Add config module (db path, host 127.0.0.1, port, Overpass/Nominatim endpoints, cache window, dedup thresholds, optional contact string); verify unit tests cover defaults, overrides, and an invalid value being rejected
 
 ## 2. Storage (lead-data)
 
