@@ -8,19 +8,19 @@
 
 ## 2. Storage (lead-data)
 
-- [ ] 2.1 Implement SQLite connection + versioned SQL migrations creating `searches`, `geocode_cache`, `raw_records`, `leads`, `lead_sources`, `search_leads`, `duplicate_pairs`; verify tests: fresh DB migrates, re-running migrations is a no-op, data persists after reopening the file
-- [ ] 2.2 Implement repository functions (save raw record, upsert lead, link sources, record search, read/write geocode cache, duplicate pair status); verify tests cover happy paths plus unique-constraint/duplicate-insert and missing-row cases, and that raw payloads are stored unmodified
+- [x] 2.1 Implement SQLite connection + versioned SQL migrations creating `searches`, `geocode_cache`, `raw_records`, `leads`, `lead_sources`, `search_leads`, `duplicate_pairs`; verify tests: fresh DB migrates, re-running migrations is a no-op, data persists after reopening the file
+- [x] 2.2 Implement repository functions (save raw record, upsert lead, link sources, record search, read/write geocode cache, duplicate pair status); verify tests cover happy paths plus unique-constraint/duplicate-insert and missing-row cases, and that raw payloads are stored unmodified
 
 ## 3. Normalization (lead-data)
 
-- [ ] 3.1 Implement phone normalization to E.164 with region default, original retained, multiple-number handling; verify tests for local format, already-international, invalid text, empty, and multiple numbers
-- [ ] 3.2 Implement website canonicalization (missing scheme, host case, trailing slash, tracking params, invalid values dropped); verify tests for each case including garbage input and `javascript:` URLs being rejected
-- [ ] 3.3 Implement address assembly from address parts and coordinates handling; verify tests for full, partial, coordinates-only, and empty inputs
+- [x] 3.1 Implement phone normalization to E.164 with region default, original retained, multiple-number handling; verify tests for local format, already-international, invalid text, empty, and multiple numbers
+- [x] 3.2 Implement website canonicalization (missing scheme, host case, trailing slash, tracking params, invalid values dropped); verify tests for each case including garbage input and `javascript:` URLs being rejected
+- [x] 3.3 Implement address assembly from address parts and coordinates handling; verify tests for full, partial, coordinates-only, and empty inputs
 
 ## 4. Deduplication (lead-data)
 
-- [ ] 4.1 Implement match scoring (confident vs possible vs none) with configurable thresholds; verify fixture-pair tests: same phone, same domain, similar-name-nearby, similar-name-far-apart, conflicting phone, identical re-run
-- [ ] 4.2 Implement merge (union sources, keep most complete fields), reject (persisted, never re-suggested), and review-queue population; verify tests for merge preserving all sources, reject permanence, and re-running a search creating no duplicates
+- [x] 4.1 Implement match scoring (confident vs possible vs none) with configurable thresholds; verify fixture-pair tests: same phone, same domain, similar-name-nearby, similar-name-far-apart, conflicting phone, identical re-run
+- [x] 4.2 Implement merge (union sources, keep most complete fields), reject (persisted, never re-suggested), and review-queue population; verify tests for merge preserving all sources, reject permanence, and re-running a search creating no duplicates
 
 ## 5. Source adapters (source-adapters)
 
